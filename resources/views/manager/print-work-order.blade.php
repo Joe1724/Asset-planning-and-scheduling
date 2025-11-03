@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Order Receipt</title>
+    <style>
+        @media print {
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+            .receipt { max-width: 800px; margin: 0 auto; border: 1px solid #000; padding: 20px; }
+            .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+            .header h1 { margin: 0; font-size: 24px; }
+            .header p { margin: 5px 0; }
+            .section { margin-bottom: 20px; }
+            .section h2 { font-size: 18px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+            .field { margin-bottom: 8px; }
+            .field label { font-weight: bold; display: inline-block; width: 150px; }
+            .field span { display: inline-block; }
+            .footer { text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; }
+            .no-print { display: none; }
+        }
+        @media screen {
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+            .receipt { max-width: 800px; margin: 0 auto; background: white; border: 1px solid #ddd; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+            .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+            .header h1 { margin: 0; font-size: 24px; }
+            .header p { margin: 5px 0; }
+            .section { margin-bottom: 20px; }
+            .section h2 { font-size: 18px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+            .field { margin-bottom: 8px; }
+            .field label { font-weight: bold; display: inline-block; width: 150px; }
+            .field span { display: inline-block; }
+            .footer { text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; }
+            .print-btn { background: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-bottom: 20px; }
+            .print-btn:hover { background: #0056b3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="margin-bottom: 20px;">
+        <button class="print-btn" onclick="window.print()">Print Receipt</button>
+        <a href="{{ route('dashboard') }}" class="back-btn" style="background: #6c757d; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; text-decoration: none; margin-left: 10px;">Back to Dashboard</a>
+    </div>
+
+    <div class="receipt">
+        <div class="header">
+            <h1>Work Order Receipt</h1>
+            <p>School Maintenance Management System</p>
+            <p>Generated on: {{ now()->format('M d, Y H:i') }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Work Order Details</h2>
+            <div class="field">
+                <label>Work Order ID:</label>
+                <span>{{ $workOrder->id }}</span>
+            </div>
+            <div class="field">
+                <label>Title:</label>
+                <span>{{ $workOrder->title }}</span>
+            </div>
+            <div class="field">
+                <label>Status:</label>
+                <span>{{ ucfirst($workOrder->status) }}</span>
+            </div>
+            <div class="field">
+                <label>Priority:</label>
+                <span>{{ ucfirst($workOrder->priority) }}</span>
+            </div>
+            <div class="field">
+                <label>Created Date:</label>
+                <span>{{ $workOrder->created_at->format('M d, Y H:i') }}</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Request Information</h2>
+            <div class="field">
+                <label>Original Request ID:</label>
+                <span>{{ $workOrder->sourceRequest->id }}</span>
+            </div>
+            <div class="field">
+                <label>Location:</label>
+                <span>{{ $workOrder->sourceRequest->location->name ?? 'N/A' }}</span>
+            </div>
+            <div class="field">
+                <label>Submitted By:</label>
+                <span>{{ $workOrder->sourceRequest->submittedByUser->name ?? 'N/A' }}</span>
+            </div>
+            <div class="field">
+                <label>Description:</label>
+                <span>{{ $workOrder->sourceRequest->description }}</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Assignment Details</h2>
+            <div class="field">
+                <label>Assigned To:</label>
+                <span>{{ $workOrder->assignedToUser->name ?? 'N/A' }}</span>
+            </div>
+            <div class="field">
+                <label>Generated By:</label>
+                <span>{{ $workOrder->generatedByUser->name ?? 'N/A' }}</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>This is an official work order receipt. Please keep for your records.</p>
+            <p>Thank you for using the School Maintenance Management System.</p>
+        </div>
+    </div>
+</body>
+</html>

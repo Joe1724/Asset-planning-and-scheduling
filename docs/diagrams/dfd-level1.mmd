@@ -1,0 +1,53 @@
+graph TD
+  subgraph External Entities
+    E1[Teacher / Staff]
+    E2[Manager]
+    E3[Technician]
+  end
+
+  subgraph Processes
+    P1[P1: Manage Assets & Templates]
+    P2[P2: Handle Maintenance Requests]
+    P3[P3: Manage Work Orders & Schedule]
+    P4[P4: Manage Inventory & Components]
+    P5[P5: Generate Reports & Notifications]
+  end
+
+  subgraph Data Stores
+    DS1[DS1: users]
+    DS2[DS2: locations]
+    DS3[DS3: assets]
+    DS4[DS4: maintenance_tasks]
+    DS5[DS5: maintenance_requests]
+    DS6[DS6: work_orders & work_order_components]
+    DS7[DS7: components]
+  end
+
+  E1 -- "Request Details" --> P2
+  P2 -- "New Request" --> DS5
+  P2 -- "Request Status" --> E1
+
+  E2 -- "Asset / Location Updates" --> P1
+  P1 -- "Update Asset Data" --> DS3
+  P1 -- "Update Locations" --> DS2
+  P1 -- "Task Templates" --> DS4
+
+  E2 -- "Approve Request" --> P2
+  P2 -- "Approved Request" --> P3
+
+  E2 -- "Work Order Management" --> P3
+  P3 -- "Work Order Data" --> DS6
+  P3 -- "Schedule Generation (DS4 + DS3)" --> DS6
+
+  E3 -- "Work Order Updates, Parts Used" --> P3
+  P3 -- "Component Usage" --> P4
+  P4 -- "Update Stock" --> DS7
+  P3 -- "Asset Status / Inspections" --> DS3
+
+  P5 -- "Reports & Notifications" --> E1
+  P5 -- "Reports & Notifications" --> E2
+  P5 -- "Reports & Notifications" --> E3
+
+  DS6 -- "Work Order Status, Overdues" --> P5
+  DS3 -- "Asset Status, Inspections" --> P5
+  DS5 -- "Request Status" --> P5

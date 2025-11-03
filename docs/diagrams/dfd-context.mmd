@@ -1,0 +1,14 @@
+graph TD
+  A[Teacher / Staff] -->|Submit Maintenance Request| B[(AssetEd System)]
+  B -->|Request Status, Notifications| A
+
+  C[Manager] -->|Manage Assets, Schedule, Approve Requests| B
+  B -->|Notifications, Reports, Dashboard Data| C
+
+  D[Technician] -->|View/Update Work Orders, Record Parts Used| B
+  B -->|Assigned Work Orders, Instructions| D
+
+  E[External Inventory Supplier (Optional)] -->|Order Parts / Supply Info| B
+  B -->|Inventory Updates / Order Details| E
+
+  B -->|Warranty / Calibration Alerts| C

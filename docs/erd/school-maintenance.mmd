@@ -1,0 +1,96 @@
+erDiagram
+    users {
+        int id PK
+        string name
+        string email
+        string password
+        enum role
+        datetime created_at
+        datetime updated_at
+    }
+
+    locations {
+        int id PK
+        string name
+        int parent_id FK
+        enum type
+    }
+
+    assets {
+        int id PK
+        string name
+        int location_id FK
+        enum category
+        enum status
+        string manufacturer
+        string model_number
+        string serial_number
+        date installation_date
+        date last_inspection_date
+        date next_inspection_due
+    }
+
+    maintenance_tasks {
+        int id PK
+        string title
+        text description
+        enum category
+        int default_frequency_days
+        decimal estimated_time_hours
+    }
+
+    maintenance_requests {
+        int id PK
+        int submitted_by_user_id FK
+        int location_id FK
+        int asset_id FK
+        string title
+        text description
+        enum status
+        datetime created_at
+    }
+
+    work_orders {
+        int id PK
+        int asset_id FK
+        int assigned_to_user_id FK
+        int generated_by_user_id FK
+        int source_task_id FK
+        int source_request_id FK
+        enum status
+        enum priority
+        string title
+        text description
+        datetime scheduled_start_at
+        datetime completed_at
+        text notes
+    }
+
+    components {
+        int id PK
+        string name
+        string part_number
+        int current_stock
+        int min_stock_level
+        string storage_bin
+    }
+
+    work_order_components {
+        int id PK
+        int work_order_id FK
+        int component_id FK
+        int quantity_used
+    }
+
+    users ||--o{ maintenance_requests : "submits"
+    users ||--o{ work_orders : "assigned_to"
+    users ||--o{ work_orders : "generates"
+    locations ||--o{ assets : "contains"
+    locations ||--o{ maintenance_requests : "reports_from"
+    locations ||--|| locations : "parent_of"
+    assets ||--o{ work_orders : "maintained_by"
+    assets ||--o{ maintenance_requests : "reported_for"
+    maintenance_tasks ||--o{ work_orders : "source_of"
+    maintenance_requests ||--o{ work_orders : "generates"
+    work_orders ||--o{ work_order_components : "uses"
+    components ||--o{ work_order_components : "used_in"

@@ -1,0 +1,33 @@
+graph TD
+  subgraph Client-Side
+    A[End User Device<br/>(Laptop, Tablet, Phone)] -- HTTP/HTTPS --> B[Web Browser]
+  end
+
+  subgraph Server-Side Application Hosting
+    C[Web Server<br/>(Nginx / Apache)] -- HTTP/HTTPS --> D[AssetEd Application<br/>(Laravel)]
+  end
+
+  subgraph AssetEd Application (Laravel Stack)
+    D -- "Livewire / Blade Rendering" --> B
+    D -- "HTTP Request Processing" --> D
+    D -- "Middleware: Auth, Sessions" --> D
+    D -- "Controllers / Business Logic" --> D
+    D -- "Eloquent ORM (Data Access)" --> E[(MySQL Database)]
+    D -- "Dispatch Jobs" --> F[(Queue: Redis / Database)]
+    D -- "Schedules / Cron" --> G[(Scheduler: Laravel/Cron)]
+  end
+
+  subgraph External Services
+    D -- "Email Notifications" --> H[(Email Service: SMTP/SES/Postmark)]
+  end
+
+  subgraph Data Layer
+    E -- "Stores & Retrieves Data" --> D
+  end
+
+  subgraph Background Processing
+    G -- "Triggers Jobs" --> F
+    F -- "Processes Asynchronously" --> D
+  end
+
+  B -- "Dynamic UI Events (Livewire)" --> D
