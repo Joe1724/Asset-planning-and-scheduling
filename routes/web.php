@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('manager')->name('manager.')->group(function () {
         Route::post('/convert-to-work-order/{requestId}', [ManagerController::class, 'convertToWorkOrder'])->name('convert-to-work-order');
         Route::get('/print-work-order/{workOrderId}', [ManagerController::class, 'printWorkOrder'])->name('print-work-order');
+        Route::patch('/mark-notification-read/{notificationId}', [ManagerController::class, 'markNotificationRead'])->name('mark-notification-read');
     });
 
     // Technician Routes

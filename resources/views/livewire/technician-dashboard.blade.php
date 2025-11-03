@@ -1,11 +1,41 @@
 <div class="p-6">
     <div class="mb-8">
-        <h1 class="mb-2 text-3xl font-bold text-gray-900">
-            <i class="mr-3 text-orange-600 fas fa-wrench"></i>
-            My Work Orders
-        </h1>
-        <p class="text-gray-600">Manage and complete your assigned maintenance tasks</p>
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="mb-2 text-3xl font-bold text-gray-900">
+                    <i class="mr-3 text-orange-600 fas fa-wrench"></i>
+                    My Work Orders
+                </h1>
+                <p class="text-gray-600">Manage and complete your assigned maintenance tasks</p>
+            </div>
+            @if($notifications->count() > 0)
+                <div class="px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full">
+                    {{ $notifications->count() }} unread notification{{ $notifications->count() > 1 ? 's' : '' }}
+                </div>
+            @endif
+        </div>
     </div>
+
+    @if($notifications->count() > 0)
+        <div class="p-4 mb-6 border border-blue-200 rounded-lg bg-blue-50">
+            <h3 class="mb-3 text-lg font-semibold text-blue-900">Notifications</h3>
+            @foreach($notifications as $notification)
+                <div class="p-3 mb-2 bg-white border border-blue-200 rounded">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h4 class="font-medium text-blue-900">{{ $notification->title }}</h4>
+                            <p class="text-sm text-blue-800">{{ $notification->message }}</p>
+                            <p class="mt-1 text-xs text-blue-600">{{ $notification->created_at->diffForHumans() }}</p>
+                        </div>
+                        <button wire:click="markNotificationRead({{ $notification->id }})"
+                                class="text-sm text-blue-600 underline hover:text-blue-800">
+                            Mark as Read
+                        </button>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 
     @if (session()->has('message'))
         <div class="flex items-center p-4 mb-6 text-green-800 bg-green-100 border-l-4 border-green-500 rounded-md shadow-sm">
@@ -60,6 +90,11 @@
                                             <i class="mr-1 fas fa-clock"></i>
                                             Pending
                                         </span>
+                                    @elseif($workOrder->status === 'accepted')
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <i class="mr-1 fas fa-check-circle"></i>
+                                            Accepted
+                                        </span>
                                     @elseif($workOrder->status === 'in_progress')
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             <i class="mr-1 fas fa-spinner fa-spin"></i>
@@ -95,14 +130,21 @@
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                                    @if($workOrder->status !== 'completed')
+                                    @if ($workOrder->status === 'pending')
+                                        <button wire:click="accept({{ $workOrder->id }})"
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-white transition-colors duration-200 bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                            <i class="mr-2 fas fa-check"></i>
+                                            Accept
+                                        </button>
+                                    @elseif($workOrder->status === 'accepted' || $workOrder->status === 'in_progress')
                                         <button wire:click="complete({{ $workOrder->id }})"
-                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                                             <i class="mr-2 fas fa-check"></i>
                                             Complete
                                         </button>
-                                    @else
-                                        <span class="inline-flex items-center px-3 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
+                                    @elseif($workOrder->status === 'completed')
+                                        <span
+                                            class="inline-flex items-center px-3 py-1 text-sm font-medium text-green-800 bg-green-100 rounded-full">
                                             <i class="mr-2 fas fa-check-circle"></i>
                                             Completed
                                         </span>

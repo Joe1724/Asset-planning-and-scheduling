@@ -14,46 +14,44 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Teacher User',
-            'email' => 'teacher@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'teacher',
-        ]);
+        // Create 10 teachers
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => 'Teacher ' . $i,
+                'email' => 'teacher' . $i . '@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'teacher',
+            ]);
+        }
 
-        User::create([
-            'name' => 'Manager User',
-            'email' => 'manager@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'manager',
-        ]);
+        // Create 10 managers
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => 'Manager ' . $i,
+                'email' => 'manager' . $i . '@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'manager',
+            ]);
+        }
 
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
+        // Create 10 admins
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => 'Admin ' . $i,
+                'email' => 'admin' . $i . '@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+            ]);
+        }
 
-        User::create([
-            'name' => 'Harres Uba',
-            'email' => 'rreshamain@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ]);
-
-        User::create([
-            'name' => 'Joe Demar',
-            'email' => 'joedemar@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'manager',
-        ]);
-
-        User::create([
-            'name' => 'Technician User',
-            'email' => 'technician@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'technician',
-        ]);
+        // Create 10 technicians
+        for ($i = 1; $i <= 10; $i++) {
+            User::create([
+                'name' => 'Technician ' . $i,
+                'email' => 'technician' . $i . '@example.com',
+                'password' => Hash::make('password'),
+                'role' => 'technician',
+            ]);
+        }
     }
 }
