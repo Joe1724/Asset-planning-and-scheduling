@@ -3,14 +3,61 @@
 @section('content')
 <div class="p-8">
     <div class="mb-8">
-        <h1 class="mb-2 text-3xl font-bold text-gray-900">
-            <i class="mr-3 text-green-600 fas fa-plus-circle"></i>
-            Submit Maintenance Request
-        </h1>
-        <p class="text-gray-600">Report maintenance issues for your classroom or facility</p>
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="mb-2 text-3xl font-bold text-gray-900">
+                    <i class="mr-3 text-green-600 fas fa-plus-circle"></i>
+                    Submit Maintenance Request
+                </h1>
+                <p class="text-gray-600">Report maintenance issues for your classroom or facility</p>
+            </div>
+            @if($notifications->count() > 0)
+                <div class="px-3 py-1 text-sm text-blue-800 bg-blue-100 rounded-full">
+                    {{ $notifications->count() }} unread notification{{ $notifications->count() > 1 ? 's' : '' }}
+                </div>
+            @endif
+        </div>
     </div>
 
-    <div class="p-8 bg-white shadow-modern rounded-xl">
+    @if($notifications->count() > 0)
+        <div class="p-4 mb-6 border border-blue-200 rounded-lg bg-blue-50">
+            <h3 class="mb-3 text-lg font-semibold text-blue-900">Notifications</h3>
+            @foreach($notifications as $notification)
+                <div class="p-3 mb-2 bg-white border border-blue-200 rounded">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h4 class="font-medium text-blue-900">{{ $notification->title }}</h4>
+                            <p class="text-sm text-blue-800">{{ $notification->message }}</p>
+                            <p class="mt-1 text-xs text-blue-600">{{ $notification->created_at->diffForHumans() }}</p>
+                        </div>
+                        <form action="{{ route('teacher.mark-notification-read', $notification->id) }}" method="POST" class="ml-4">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-sm text-blue-600 underline hover:text-blue-800">
+                                Mark as Read
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
+    @if (session()->has('success'))
+        <div class="flex items-center p-4 mb-6 text-green-800 bg-green-100 border-l-4 border-green-500 rounded-md shadow-sm">
+            <i class="mr-3 text-green-500 fas fa-check-circle"></i>
+            <span>{{ session('success') }}</span>
+        </div>
+    @endif
+
+    @if (session()->has('message'))
+        <div class="flex items-center p-4 mb-6 text-green-800 bg-green-100 border-l-4 border-green-500 rounded-md shadow-sm">
+            <i class="mr-3 text-green-500 fas fa-check-circle"></i>
+            <span>{{ session('message') }}</span>
+        </div>
+    @endif
+
+    <div class="p-8 bg-white shadow-lg rounded-xl">
         <div class="mb-6">
             <h2 class="mb-2 text-xl font-semibold text-gray-900">
                 <i class="mr-2 text-blue-600 fas fa-tools"></i>
@@ -52,12 +99,12 @@
                     Description
                 </label>
                 <div class="relative">
-                    <textarea name="description" id="description" rows="5" required
+                    <textarea name="description" id="description" rows="5"
                               placeholder="Please describe the maintenance issue in detail..."
                               class="block w-full px-4 py-3 text-base transition-colors duration-200 border-gray-300 rounded-lg shadow-sm resize-none focus:ring-blue-500 focus:border-blue-500"
-                              style="min-height: 120px;"></textarea>
+                              style="min-height: 120px;" required></textarea>
                     <div class="absolute text-xs text-gray-400 bottom-3 right-3">
-                        <span x-data="{ count: 0 }" x-init="$watch($el.previousElementSibling, value => count = value.value.length)" x-text="count"></span>/500
+                        <span>0</span>/500
                     </div>
                 </div>
                 <p class="mt-1 text-sm text-gray-500">Provide as much detail as possible to help maintenance staff understand the issue.</p>

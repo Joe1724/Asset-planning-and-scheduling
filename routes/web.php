@@ -16,6 +16,14 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Global notification route
+Route::patch('/mark-notification-read/{notificationId}', function($notificationId) {
+    $notification = \App\Models\Notification::where('user_id', auth()->id())->findOrFail($notificationId);
+    $notification->update(['is_read' => true]);
+
+    return redirect()->back()->with('message', 'Notification marked as read.');
+})->name('mark-notification-read')->middleware('auth');
+
 // Protected Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
@@ -37,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // Teacher Routes
     Route::prefix('teacher')->name('teacher.')->group(function () {
         Route::post('/submit-request', [TeacherController::class, 'submitRequest'])->name('submit-request');
+        Route::patch('/mark-notification-read/{notificationId}', [TeacherController::class, 'markNotificationRead'])->name('teacher.mark-notification-read');
     });
 
     // Manager Routes
@@ -48,7 +57,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Technician Routes
     Route::prefix('technician')->name('technician.')->group(function () {
+        Route::get('/dashboard', [TechnicianController::class, 'dashboard'])->name('dashboard');
+        Route::post('/accept-work-order/{workOrderId}', [TechnicianController::class, 'acceptWorkOrder'])->name('accept-work-order');
+        Route::post('/start-work-order/{workOrderId}', [TechnicianController::class, 'startWorkOrder'])->name('start-work-order');
         Route::post('/complete-work-order/{workOrderId}', [TechnicianController::class, 'completeWorkOrder'])->name('complete-work-order');
+        Route::get('/view-work-order/{workOrderId}', [TechnicianController::class, 'viewWorkOrder'])->name('view-work-order');
     });
 
     // Admin Routes

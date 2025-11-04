@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login to AssetEd - Professional Maintenance Management System">
-    <title>Login - AssetEd</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="description" content="Login to OpsCore - Professional Maintenance Management System">
+    <title>Login - OpsCore</title>
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .bg-gradient-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .shadow-modern { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-primary sm:px-6 lg:px-8">
+<body class="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-indigo-500 to-purple-600 sm:px-6 lg:px-8">
     <div class="w-full max-w-md space-y-8">
-        <div class="p-8 bg-white shadow-modern rounded-xl">
+        <div class="p-8 bg-white shadow-lg rounded-xl">
             <div class="text-center">
                 <i class="w-16 h-16 mx-auto mb-4 text-4xl text-indigo-600 fas fa-tools"></i>
                 <h2 class="mb-2 text-3xl font-bold text-gray-900">Welcome Back</h2>

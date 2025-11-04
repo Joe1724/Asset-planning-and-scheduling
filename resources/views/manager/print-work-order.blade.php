@@ -4,42 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Order Receipt</title>
-    <style>
-        @media print {
-            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
-            .receipt { max-width: 800px; margin: 0 auto; border: 1px solid #000; padding: 20px; }
-            .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
-            .header h1 { margin: 0; font-size: 24px; }
-            .header p { margin: 5px 0; }
-            .section { margin-bottom: 20px; }
-            .section h2 { font-size: 18px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-            .field { margin-bottom: 8px; }
-            .field label { font-weight: bold; display: inline-block; width: 150px; }
-            .field span { display: inline-block; }
-            .footer { text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; }
-            .no-print { display: none; }
-        }
-        @media screen {
-            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
-            .receipt { max-width: 800px; margin: 0 auto; background: white; border: 1px solid #ddd; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-            .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
-            .header h1 { margin: 0; font-size: 24px; }
-            .header p { margin: 5px 0; }
-            .section { margin-bottom: 20px; }
-            .section h2 { font-size: 18px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
-            .field { margin-bottom: 8px; }
-            .field label { font-weight: bold; display: inline-block; width: 150px; }
-            .field span { display: inline-block; }
-            .footer { text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 10px; }
-            .print-btn { background: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-bottom: 20px; }
-            .print-btn:hover { background: #0056b3; }
-        }
-    </style>
 </head>
 <body>
-    <div class="no-print" style="margin-bottom: 20px;">
-        <button class="print-btn" onclick="window.print()">Print Receipt</button>
-        <a href="{{ route('dashboard') }}" class="back-btn" style="background: #6c757d; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; text-decoration: none; margin-left: 10px;">Back to Dashboard</a>
+    <div class="mb-5 no-print">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white border-none px-5 py-2.5 text-base cursor-pointer mb-5" onclick="window.print()">Print Receipt</button>
+        <a href="{{ route('dashboard') }}" class="bg-gray-600 hover:bg-gray-700 text-white border-none px-5 py-2.5 text-base cursor-pointer no-underline ml-2.5">Back to Dashboard</a>
     </div>
 
     <div class="receipt">

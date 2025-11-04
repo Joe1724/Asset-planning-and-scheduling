@@ -14,7 +14,8 @@ class TeacherController extends Controller
     public function dashboard()
     {
         $locations = Location::all();
-        return view('teacher.dashboard', compact('locations'));
+        $notifications = Notification::forUser(Auth::id())->unread()->get();
+        return view('teacher.dashboard', compact('locations', 'notifications'));
     }
 
     public function submitRequest(Request $request)
@@ -46,5 +47,13 @@ class TeacherController extends Controller
         }
 
         return redirect()->back()->with('success', 'Maintenance request submitted successfully.');
+    }
+
+    public function markNotificationRead($notificationId)
+    {
+        $notification = Notification::where('user_id', Auth::id())->findOrFail($notificationId);
+        $notification->update(['is_read' => true]);
+
+        return redirect()->back()->with('message', 'Notification marked as read.');
     }
 }

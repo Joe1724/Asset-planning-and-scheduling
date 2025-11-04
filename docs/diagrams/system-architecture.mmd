@@ -4,10 +4,10 @@ graph TD
   end
 
   subgraph Server-Side Application Hosting
-    C[Web Server<br/>(Nginx / Apache)] -- HTTP/HTTPS --> D[AssetEd Application<br/>(Laravel)]
+    C[Web Server<br/>(Nginx / Apache)] -- HTTP/HTTPS --> D[OpsCore Application<br/>(Laravel)]
   end
 
-  subgraph AssetEd Application (Laravel Stack)
+  subgraph OpsCore Application (Laravel Stack)
     D -- "Livewire / Blade Rendering" --> B
     D -- "HTTP Request Processing" --> D
     D -- "Middleware: Auth, Sessions" --> D

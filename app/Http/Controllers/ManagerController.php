@@ -42,6 +42,7 @@ class ManagerController extends Controller
                     'generated_by_user_id' => Auth::id(),
                     'title' => 'Maintenance Request: ' . substr($maintenanceRequest->description, 0, 50) . '...',
                     'description' => $maintenanceRequest->description,
+                    'planning_description' => $request->input('planning_description'),
                     'status' => 'pending',
                     'priority' => 'medium',
                 ]);
@@ -50,7 +51,7 @@ class ManagerController extends Controller
                 Notification::create([
                     'type' => 'work_order',
                     'title' => 'New Work Order Assigned',
-                    'message' => 'You have been assigned a new work order: ' . $workOrder->title . ' by ' . Auth::user()->name,
+                    'message' => 'You have been assigned a new work order: ' . $workOrder->title . ' by ' . Auth::user()->name . '. Check the work order details for planning information.',
                     'user_id' => $technician->id,
                     'sender_id' => Auth::id(),
                     'related_id' => $workOrder->id,

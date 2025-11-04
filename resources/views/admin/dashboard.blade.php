@@ -11,7 +11,7 @@
 
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-4">
-        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-modern rounded-xl">
+        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-lg rounded-xl">
             <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">Total Users</h3>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-modern rounded-xl">
+        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-lg rounded-xl">
             <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">Total Assets</h3>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-modern rounded-xl">
+        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-lg rounded-xl">
             <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">Pending Requests</h3>
@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-modern rounded-xl">
+        <div class="relative p-6 overflow-hidden bg-white border-l-4 border-blue-900 shadow-lg rounded-xl">
             <div class="flex items-center justify-between">
                 <div>
                     <h3 class="text-sm font-medium tracking-wide text-gray-500 uppercase">Active Work Orders</h3>
@@ -78,7 +78,7 @@
             Quick Actions
         </h2>
         <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <a href="{{ route('admin.users') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-modern rounded-xl hover:shadow-xl hover:border-indigo-200">
+            <a href="{{ route('admin.users') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-lg rounded-xl hover:shadow-xl hover:border-indigo-200">
                 <div class="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-br from-indigo-50 to-blue-50 group-hover:opacity-100"></div>
                 <div class="relative flex items-center space-x-4">
                     <div class="p-3 transition-colors duration-300 bg-indigo-100 rounded-lg group-hover:bg-indigo-200">
@@ -91,7 +91,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('admin.requests') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-modern rounded-xl hover:shadow-xl hover:border-yellow-200">
+            <a href="{{ route('admin.requests') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-lg rounded-xl hover:shadow-xl hover:border-yellow-200">
                 <div class="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-br from-yellow-50 to-orange-50 group-hover:opacity-100"></div>
                 <div class="relative flex items-center space-x-4">
                     <div class="p-3 transition-colors duration-300 bg-yellow-100 rounded-lg group-hover:bg-yellow-200">
@@ -104,7 +104,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('admin.work-orders') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-modern rounded-xl hover:shadow-xl hover:border-purple-200">
+            <a href="{{ route('admin.work-orders') }}" class="relative p-6 overflow-hidden transition-all duration-300 bg-white border border-gray-100 group shadow-lg rounded-xl hover:shadow-xl hover:border-purple-200">
                 <div class="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-br from-purple-50 to-pink-50 group-hover:opacity-100"></div>
                 <div class="relative flex items-center space-x-4">
                     <div class="p-3 transition-colors duration-300 bg-purple-100 rounded-lg group-hover:bg-purple-200">
@@ -122,7 +122,7 @@
     <!-- Recent Activity -->
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <!-- Recent Requests -->
-        <div class="p-6 bg-white shadow-modern rounded-xl">
+        <div class="p-6 bg-white shadow-lg rounded-xl">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-bold text-gray-900">
                     Recent Requests
@@ -161,7 +161,7 @@
         </div>
 
         <!-- Recent Work Orders -->
-        <div class="p-6 bg-white shadow-modern rounded-xl">
+        <div class="p-6 bg-white shadow-lg rounded-xl">
             <div class="flex items-center justify-between mb-6">
                 <h2 class="text-xl font-bold text-gray-900">
                     Recent Work Orders

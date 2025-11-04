@@ -63,17 +63,27 @@
                                 </span>
                             </td>
                             <td class="px-4 py-2 border">
-                                <form action="{{ route('manager.convert-to-work-order', $request->id) }}" method="POST" class="inline">
+                                <form action="{{ route('manager.convert-to-work-order', $request->id) }}" method="POST" class="space-y-2">
                                     @csrf
-                                    <select name="technician_id" class="px-2 py-1 text-sm border border-gray-300 rounded" required>
-                                        <option value="">Select Technician</option>
-                                        @foreach($technicians as $technician)
-                                            <option value="{{ $technician->id }}">{{ $technician->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <button type="submit" class="px-3 py-1 ml-2 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                                        Convert to Work Order
-                                    </button>
+                                    <div>
+                                        <label for="planning_description_{{ $request->id }}" class="block mb-1 text-xs font-medium text-gray-700">
+                                            Planning Description
+                                        </label>
+                                        <textarea name="planning_description" id="planning_description_{{ $request->id }}"
+                                                  rows="3" class="w-full px-2 py-1 text-sm border border-gray-300 rounded resize-none"
+                                                  placeholder="Add planning details for the technician..."></textarea>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <select name="technician_id" class="px-2 py-1 text-sm border border-gray-300 rounded" required>
+                                            <option value="">Select Technician</option>
+                                            @foreach($technicians as $technician)
+                                                <option value="{{ $technician->id }}">{{ $technician->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <button type="submit" class="px-3 py-1 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                                            Convert to Work Order
+                                        </button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>

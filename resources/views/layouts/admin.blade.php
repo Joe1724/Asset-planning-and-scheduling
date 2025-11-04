@@ -21,7 +21,7 @@
             <div class="p-6 border-b border-slate-700">
                 <div class="flex items-center space-x-3">
                     <div>
-                        <h2 class="text-xl font-bold">AssetEd</h2>
+                        <h2 class="text-xl font-bold">OpsCore</h2>
                         <p class="text-sm text-slate-400">Admin Panel</p>
                     </div>
                 </div>

@@ -18,6 +18,7 @@ class WorkOrder extends Model
         'priority',
         'title',
         'description',
+        'planning_description',
         'scheduled_start_at',
         'completed_at',
         'notes',
