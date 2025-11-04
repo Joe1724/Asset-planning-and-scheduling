@@ -34,7 +34,7 @@ OpsCore is a comprehensive maintenance management system built with Laravel, des
 ## Tech Stack
 
 - **Framework**: Laravel 11.31
-- **Database**: SQLite (configurable)
+- **Database**: MySQL (configurable)
 - **Frontend**: Blade templates with Tailwind CSS
 - **Authentication**: Laravel Sanctum
 - **Real-time**: Laravel Broadcasting (optional)
