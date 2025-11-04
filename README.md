@@ -54,7 +54,7 @@ OpsCore is a comprehensive maintenance management system built with Laravel, des
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Joe1724/Asset-planning-and-scheduling
-   cd OpsCore
+   cd Asset-planning-and-scheduling
    ```
 
 2. **Install PHP dependencies**
